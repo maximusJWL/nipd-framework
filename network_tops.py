@@ -9,7 +9,7 @@ def make_fc_net(size):
     np.fill_diagonal(network, 0)
     return network
 #---------------------------------------------------------------------------------------------------
-def make_ring_net(size, k_neighbours):
+def make_ring_net(size, k_neighbours): #maybe unnecessary, can just use W-Strogatz with p_rewire == 0
     if not isinstance(size, int) or size <= 0:
         raise ValueError("Size must be positive integer")
     if not isinstance(k_neighbours, int) or k_neighbours <= 0:
@@ -37,13 +37,15 @@ def make_sw_net(size, k_neighbours, p_rewire):
         raise ValueError("Size must be positive integer")
     if not isinstance(k_neighbours, int) or k_neighbours <= 0:
         raise ValueError("K Neighbours must be positive integer")
-    if k_neighbours >= size - 1:
-        raise ValueError("Neighbours must be < (size - 1)")
+    if k_neighbours >= size:
+        raise ValueError("Neighbours must be < size")
+    if k_neighbours == (size - 1):
+        return make_fc_net(size)
     if k_neighbours % 2 != 0:
         raise ValueError("Neighbours must be even to avoid asymmetrical connections")
     if not (0.0 <= p_rewire <= 1.0):
         raise ValueError("Rewiring probability (p_rewire) must be between 0.0 and 1.0.")
-
+    
     edges = set()
     for i in range(size):
         for offset in range(1, ((k_neighbours// 2) + 1)):
