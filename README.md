@@ -1,18 +1,24 @@
 # NIPD Framework - Network Iterated Prisoner's Dilemma
 
+[![PyPI version](https://badge.fury.io/py/nipd-framework.svg)](https://badge.fury.io/py/nipd-framework)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
 A comprehensive Python package for simulating and analyzing multi-agent learning in network-structured environments using the Iterated Prisoner's Dilemma.
 
 ## Installation
 
 ```bash
-# Install from PyPI (when available)
+# Install from PyPI (Recommended)
 pip install nipd-framework
 
 # Or install from source
-git clone <your-repository-url>
+git clone https://github.com/maximusJWL/nipd-framework
 cd nipd-framework
 pip install -e .
 ```
+
+**Latest Release**: [v1.0.0](https://pypi.org/project/nipd-framework/1.0.0/) - Now available on PyPI!
 
 ## Package Contents
 

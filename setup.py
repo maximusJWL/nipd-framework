@@ -17,11 +17,13 @@ setup(
     description="Network Iterated Prisoner's Dilemma Framework for Multi-Agent Learning",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/maximusJWL/nipd-framework",
     packages=find_packages(),
     license="CC BY-NC 4.0",
     classifiers=[
         "Intended Audience :: Science/Research",
+        "Intended Audience :: Education",
+        "License :: Other/Proprietary License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.13",
@@ -52,7 +54,11 @@ setup(
             "nipd-simulate=nipd.agent_simulator:main",
         ],
     },
-    keywords="multi-agent, prisoner-dilemma, reinforcement-learning, game-theory, networks",
-    project_urls={},
+    keywords="multi-agent, prisoner-dilemma, reinforcement-learning, game-theory, networks, cooperation, defection, social-dilemmas",
+    project_urls={
+        "Bug Reports": "https://github.com/maximusJWL/nipd-framework/issues",
+        "Source": "https://github.com/maximusJWL/nipd-framework",
+        "Documentation": "https://github.com/maximusJWL/nipd-framework#readme",
+    },
 )
 
