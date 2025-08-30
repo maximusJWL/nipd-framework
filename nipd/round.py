@@ -9,23 +9,24 @@ PD_REWARD_MATRIX = np.array([
     [5.0, 1.0]   # move = DEFECT (1)
 ])
 
-def _get_initial_move(player_id: int, player_type: str) -> int:
+def _get_initial_move(player_type: str) -> int:
     """
     Determines a player's initial move for a round if no previous move exists.
 
     Args:
-        player_id (int): The ID of the player.
         player_type (str): The type/strategy of the player.
 
     Returns:
         int: The initial move (COOPERATE or DEFECT).
     """
-    if player_type == 'cooperator':
+    nice_strats = ['cooperate', 'titfortat']
+
+    if player_type in nice_strats:
         return COOPERATE
-    elif player_type == 'defector':
-        return DEFECT
-    else:
+    elif player_type == 'random':
         return random.choice([COOPERATE, DEFECT])
+    else:
+        return DEFECT
 
 def _gather_observations(player_id: int, network: np.ndarray, all_players_last_moves: np.ndarray) -> dict:
     """
@@ -53,13 +54,11 @@ def _gather_observations(player_id: int, network: np.ndarray, all_players_last_m
             
     return observations
 
-def _calculate_player_move(player_id: int, player_type: str, observations: dict, own_last_move: int) -> int:
+def _calculate_player_move(player_type: str, observations: dict, own_last_move: int) -> int:
     """
     Calculates the next move for a player based on their type/strategy and observations.
-    This is where you'd implement the actual strategy logic (e.g., Tit-for-Tat, Pavlov, etc.).
 
     Args:
-        player_id (int): The ID of the player.
         player_type (str): The type of the player (e.g., 'cooperator', 'defector', 'tit-for-tat').
         observations (dict): Observations gathered from neighbors {neighbor_id: neighbor_move}.
         own_last_move (int): The player's own move in the previous round.
@@ -77,17 +76,17 @@ def _calculate_player_move(player_id: int, player_type: str, observations: dict,
             observed_moves_values = list(observations.values())
             mean_observed_move = np.mean(observed_moves_values)
             return round(mean_observed_move)
-        else:
-            # If no observations (e.g., no neighbors), return a default move.
-            # Tit-for-Tat often starts with Cooperate.
-            return COOPERATE
+        else: return COOPERATE
     elif player_type == 'random':
         return random.choice([COOPERATE, DEFECT])
+    elif player_type == 'mappo':
+        # For MAPPO agents, use a default cooperative strategy initially
+        # The actual moves will be overridden by the environment wrapper
+        return COOPERATE
 
-def _calculate_reward(player_id: int, own_move: int, neighbor_moves: dict, reward_matrix: np.ndarray) -> float:
+def _calculate_reward(own_move: int, neighbor_moves: dict, reward_matrix: np.ndarray) -> float:
     """
     Calculates the total reward for a player in the current round.
-    This is where you'd implement the reward calculation logic (e.g., sum of pairwise interactions).
 
     Args:
         player_id (int): The ID of the player.
@@ -134,11 +133,10 @@ def simulate_round(num_players: int, network: np.ndarray, player_assignments: li
     current_moves = np.zeros(num_players, dtype=int)
     current_rewards = np.zeros(num_players, dtype=float)
 
-    # Initialize all_players_last_moves for the first round if not provided
+    # Initialize all_players_last_moves if None (first round)
     if all_players_last_moves is None:
-        # For the very first round, players make an initial move without prior observations
         all_players_last_moves = np.array([
-            _get_initial_move(player_id, player_assignments[player_id])
+            _get_initial_move(player_assignments[player_id])
             for player_id in range(num_players)
         ])
 
@@ -151,7 +149,7 @@ def simulate_round(num_players: int, network: np.ndarray, player_assignments: li
         
         # 2. Calculate the player's move for the current round
         # Pass the player's own move from the previous round for strategy logic
-        own_move = _calculate_player_move(player_id, player_type, observations, all_players_last_moves[player_id])
+        own_move = _calculate_player_move(player_type, observations, all_players_last_moves[player_id])
         current_moves[player_id] = own_move
 
     # Phase 2: Calculate rewards for all players based on CURRENT moves
@@ -162,6 +160,6 @@ def simulate_round(num_players: int, network: np.ndarray, player_assignments: li
         neighbor_moves_for_reward = _gather_observations(player_id, network, current_moves)
 
         # 3. Calculate the player's reward for the current round
-        current_rewards[player_id] = _calculate_reward(player_id, own_move, neighbor_moves_for_reward, reward_matrix)
+        current_rewards[player_id] = _calculate_reward(own_move, neighbor_moves_for_reward, reward_matrix)
             
     return current_moves, current_rewards
