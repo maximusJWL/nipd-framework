@@ -5,11 +5,7 @@ A comprehensive Python package for simulating and analyzing multi-agent learning
 ## Installation
 
 ```bash
-# Install from PyPI (when available)
-pip install nipd-framework
-
-# Or install from source
-git clone <your-repository-url>
+git clone https://github.com/maximusJWL/nipd-framework.git
 cd nipd-framework
 pip install -e .
 ```
