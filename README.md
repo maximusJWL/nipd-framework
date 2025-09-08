@@ -7,11 +7,40 @@ A comprehensive Python package for simulating and analyzing multi-agent learning
 
 ## Installation
 
+### Prerequisites
+- Python 3.11 or higher
+- pip (Python package installer)
+
+### Quick Installation
+
 ```bash
-# Install from GitHub (Recommended)
+# Clone the repository
 git clone https://github.com/maximusJWL/nipd-framework
 cd nipd-framework
 pip install -e .
+```
+
+### If this fails, ensure dependencies are installed:
+
+```bash
+# Clone the repository
+git clone https://github.com/maximusJWL/nipd-framework
+cd nipd-framework
+
+# Install dependencies first
+pip install -r requirements.txt
+
+# Then install the package
+pip install -e .
+```
+### Examples
+
+```bash
+nipd-simulate
+
+# Test examples
+python examples/basic_simulation.py
+python examples/advanced_simulation.py
 ```
 
 **Latest Release**: [v1.0.1](https://github.com/maximusJWL/nipd-framework) - Available on GitHub!
