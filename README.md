@@ -1,7 +1,6 @@
 # NIPD Framework - Network Iterated Prisoner's Dilemma
 
-[![PyPI version](https://badge.fury.io/py/nipd-framework.svg)](https://badge.fury.io/py/nipd-framework)
-[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
 A comprehensive Python package for simulating and analyzing multi-agent learning in network-structured environments using the Iterated Prisoner's Dilemma.
@@ -9,16 +8,13 @@ A comprehensive Python package for simulating and analyzing multi-agent learning
 ## Installation
 
 ```bash
-# Install from PyPI (Recommended)
-pip install nipd-framework
-
-# Or install from source
+# Install from GitHub (Recommended)
 git clone https://github.com/maximusJWL/nipd-framework
 cd nipd-framework
 pip install -e .
 ```
 
-**Latest Release**: [v1.0.0](https://pypi.org/project/nipd-framework/1.0.0/) - Now available on PyPI!
+**Latest Release**: [v1.0.1](https://github.com/maximusJWL/nipd-framework) - Available on GitHub!
 
 ## Package Contents
 
@@ -165,7 +161,7 @@ The simulation includes configurable noise that can cause agents to execute the 
 ### Basic Simulation
 
 ```python
-import nipd-framework as nipd
+import nipd
 
 # Agent Configuration
 agent_config = {
@@ -340,7 +336,7 @@ python -m ipykernel install --user --name nipd_env --display-name "NIPD Environm
 ```
 
 ### Dependencies
-- Python 3.13+
+- Python 3.11+
 - PyTorch
 - NumPy
 - Matplotlib

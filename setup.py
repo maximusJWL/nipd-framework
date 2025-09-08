@@ -11,7 +11,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 
 setup(
     name="nipd-framework",
-    version="1.0.0",
+    version="1.0.1",
     author="maximusjwl",
     author_email="max.lams99@gmail.com",
     description="Network Iterated Prisoner's Dilemma Framework for Multi-Agent Learning",
@@ -26,11 +26,13 @@ setup(
         "License :: Other/Proprietary License",
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Topic :: Scientific/Engineering :: Mathematics",
     ],
-    python_requires=">=3.13",
+    python_requires=">=3.11",
     install_requires=requirements,
     extras_require={
         "dev": [
