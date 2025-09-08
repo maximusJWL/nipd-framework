@@ -165,7 +165,7 @@ The simulation includes configurable noise that can cause agents to execute the 
 ### Basic Simulation
 
 ```python
-import nipd
+import nipd-framework as nipd
 
 # Agent Configuration
 agent_config = {
@@ -276,7 +276,7 @@ simulation_config['noise'] = {
 ## Configuration Options
 
 ### Network Configuration
-- `type`: Network topology ('small_world', 'random', 'ring')
+- `type`: Network topology ('small_world', 'full', 'ring')
 - `k_neighbors`: Number of neighbors per agent
 - `rewire_prob`: Rewiring probability for small-world networks
 

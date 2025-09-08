@@ -31,8 +31,6 @@ def _get_initial_move(player_type: str) -> int:
 def _gather_observations(player_id: int, network: np.ndarray, all_players_last_moves: np.ndarray) -> dict:
     """
     Gathers observations (moves) for a given player from their connected neighbors.
-    This is where you'd implement specific observation rules (e.g., observe all neighbors,
-    observe only a subset, observe with noise, etc.).
 
     Args:
         player_id (int): The ID of the player for whom to gather observations.
