@@ -4,9 +4,13 @@ include LICENSE
 include *.md
 recursive-include nipd/models *.py
 
-# Include only final pretrained models (one per model type)
+# Include final pretrained models for all model types
 recursive-include nipd/models *_final.pt
 recursive-include nipd/models *_final.json
+recursive-include nipd/models *_best.pt
+recursive-include nipd/models/models *_final.pt
+recursive-include nipd/models/models *_final.json
+recursive-include nipd/models/models *_best.pt
 
 # Exclude common unwanted files
 recursive-exclude * __pycache__

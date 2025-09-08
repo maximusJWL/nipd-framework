@@ -129,21 +129,22 @@ sims/
 *.json
 zz_simulation_results_*
 
-# Exclude all simulation results and intermediate files
-sims/
-zz_simulation_results_*
-*.csv
-*.png
-*.json
+!nipd/models/*/models/*_final.pt
+!nipd/models/*/models/*_final.json
+!nipd/models/*/models/*_best.pt
+!nipd/models/*/models/*/models/*_final.pt
+!nipd/models/*/models/*/models/*_final.json
+!nipd/models/*/models/*/models/*_best.pt
+!nipd/models/simple_q_learning/simple_q_models/*_final.json
 
-# Keep only essential model files
+# Exclude intermediate training files but keep final models
 nipd/models/*/models/*.pt
 !nipd/models/*/models/*_final.pt
 !nipd/models/*/models/*_best.pt
-nipd/models/*/models/*_*.pt
 nipd/models/*/models/*.npz
 nipd/models/*/models/*.png
 nipd/models/*/models/*.json
+!nipd/models/*/models/*_final.json
 
 # Exclude training outputs and reports
 nipd/models/*/training_curves.png
