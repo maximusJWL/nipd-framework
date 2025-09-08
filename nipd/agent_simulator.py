@@ -71,7 +71,6 @@ AGENT_CONFIG = {
     'online_decentralized_ppo': 1,
     'online_lola': 1,
     'online_mappo': 1,
-    'online_simple_q': 1
 }
 
 # Network Configuration
