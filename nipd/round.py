@@ -79,7 +79,7 @@ def _calculate_player_move(player_type: str, observations: dict, own_last_move: 
         return random.choice([COOPERATE, DEFECT])
     elif player_type == 'mappo':
         # For MAPPO agents, use a default cooperative strategy initially
-        # The actual moves will be overridden by the environment wrapper
+        # actual moves will be overridden by the environment wrapper
         return COOPERATE
 
 def _calculate_reward(own_move: int, neighbor_moves: dict, reward_matrix: np.ndarray) -> float:
