@@ -28,7 +28,8 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 def flexible_import(module_path: str, class_name: str = None):
-    """Helper function to handle flexible imports for both package and direct execution"""
+    """Helper function to handle imports for both package and direct execution """
+    #(have tried to make it work without, I'm stumped)
     try:
         # When imported from package
         if class_name:
@@ -216,17 +217,13 @@ class AgentSimulator:
                 
                 # Handle single agent case - create a minimal network
                 if config['num_agents'] == 1:
-                    # For single agent, we'll create a dummy network and skip the trainer initialization
-                    # since we only need to load the model
-                    logger.info("Single decentralized PPO agent detected - creating minimal setup")
-                    
                     # Create a dummy network (1x1 matrix with no connections)
                     dummy_network = np.zeros((1, 1), dtype=int)
                     
                     # Create a minimal trainer config for loading
                     minimal_config = config.copy()
                     minimal_config['k_neighbors'] = 0
-                    minimal_config['network_type'] = 'full'  # Use full network type to avoid small world issues
+                    minimal_config['network_type'] = 'full'  # Use full network type to avoid rewiring issues
                     
                     # Create temporary trainer to access agents
                     temp_trainer = DecentralizedPPOTrainer(minimal_config)
@@ -246,13 +243,7 @@ class AgentSimulator:
                     raise FileNotFoundError(f"Decentralized PPO models directory not found: {models_dir}")
                 
                 for i, agent_id in enumerate(self.agent_ids[agent_type]):
-                    # Try final model first, then best model, then base model
                     model_path = os.path.join(models_dir, f"decentralized_ppo_agent_{i}_final.pt")
-                    if not os.path.exists(model_path):
-                        model_path = os.path.join(models_dir, f"decentralized_ppo_agent_{i}_best.pt")
-                    if not os.path.exists(model_path):
-                        model_path = os.path.join(models_dir, f"decentralized_ppo_agent_{i}.pt")
-                    
                     if not os.path.exists(model_path):
                         raise FileNotFoundError(f"Model not found for {agent_type} agent {agent_id}: {model_path}")
                     
