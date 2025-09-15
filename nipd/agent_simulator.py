@@ -1989,8 +1989,8 @@ class TitForTatAgent(BaseAgent):
             # obs[1] contains the average neighbor action (0 = cooperate, 1 = defect)
             avg_neighbor_action = obs[1]
             
-            # Use threshold of 0.5 to decide: if average >= 0.5, most neighbors defected, so defect
-            action = 1 if avg_neighbor_action >= 0.5 else 0
+            # Use threshold of 0.5 to decide: if average > 0.5, most neighbors defected, so defect
+            action = 1 if avg_neighbor_action > 0.5 else 0
         
         self.history.append(action)
         return action
