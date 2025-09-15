@@ -495,10 +495,9 @@ class OnlineLOLAAgent:
         
         model_data = torch.load(filepath, map_location=self.device, weights_only=False)
         
-        # Handle different key naming conventions
-        # Original LOLA models use 'policy_net_state_dict', online LOLA expects 'policy_network_state_dict'
+        # Original LOLA models use 'policy_net_state_dict', online LOLA uses 'policy_network_state_dict'
+        # If i touch this, it breaks
         if 'policy_network_state_dict' in model_data:
-            # New format
             self.policy_network.load_state_dict(model_data['policy_network_state_dict'])
             self.opponent_model.load_state_dict(model_data['opponent_model_state_dict'])
             self.policy_optimizer.load_state_dict(model_data['policy_optimizer_state_dict'])
@@ -519,7 +518,6 @@ class OnlineLOLAAgent:
             self.update_count = model_data['update_count']
             self.lola_enabled = model_data['lola_enabled']
         elif 'policy_net_state_dict' in model_data:
-            # Original format
             self.policy_network.load_state_dict(model_data['policy_net_state_dict'], strict=False)
             self.opponent_model.load_state_dict(model_data['opponent_model_state_dict'], strict=False)
             self.agent_id = model_data.get('agent_id', self.agent_id)
