@@ -5,7 +5,7 @@ A comprehensive framework for simulating and analyzing multi-agent learning
 in network-structured environments using the Iterated Prisoner's Dilemma.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "maximusjwl"
 __email__ = "max.lams99@gmail.com"
 
